@@ -1,0 +1,5 @@
+﻿  toy.cpp
+C:\Users\Phoenix\OneDrive\Documents\seneca\semester-3\oop345\exercises\exercise-4\toy.h(12,15): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'toy.cpp')
+  
+  exercise-4.vcxproj -> C:\Users\Phoenix\OneDrive\Documents\seneca\semester-3\oop345\exercises\exercise-4\x64\Debug\exercise-4.exe
