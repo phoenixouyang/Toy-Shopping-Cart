@@ -128,10 +128,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="shoppingCart.cpp" />
+    <ClCompile Include="tester_1.cpp" />
     <ClCompile Include="toy.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="shoppingCart.h" />
     <ClInclude Include="toy.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitignore" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

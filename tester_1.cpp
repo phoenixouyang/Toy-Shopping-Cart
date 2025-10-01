@@ -15,13 +15,13 @@
 #include "toy.h" // intentional
 
 // Cheching if header guards exists and follow convention.
-#ifndef SENECA_TOY_H
+#ifndef TOY_H
     #error "The header guard for 'toy.h' doesn't follow the convention!"
 #endif
-#ifndef SENECA_SHOPPINGCART_H
+#ifndef SHOPPINGCART_H
     #error "The header guard for 'shoppingCart.h' doesn't follow the convention!"
 #endif
-#ifndef SENECA_CONFIRMATIONORDER_H
+#ifndef CONFIRMATIONORDER_H
     #error "The header guard for 'confirmationOrder.h' doesn't follow the convention!"
 #endif
 
@@ -35,7 +35,7 @@ int main(int argc, char** argv)
 		std::cout << std::setw(3) << i + 1 << ": " << argv[i] << '\n';
 	std::cout << "--------------------------\n\n";
 
-	const seneca::Toy** ppToys = nullptr;
+	const Toy** ppToys = nullptr;
 	size_t count = 0;
 
 	// Process the file
@@ -64,7 +64,7 @@ int main(int argc, char** argv)
 			}
 		} while (file);
 
-		ppToys = new const seneca::Toy*[count];
+		ppToys = new const Toy*[count];
 		count = 0;
 
 		// read again from the file, but this time load and store data
@@ -82,7 +82,7 @@ int main(int argc, char** argv)
 				//   In the input file, commented lines start with '#'
 				if (strToy[0] != '#')
 				{
-					ppToys[count] = new seneca::Toy(strToy);
+					ppToys[count] = new Toy(strToy);
 					++count;
 				}
 			}
@@ -105,7 +105,7 @@ int main(int argc, char** argv)
 		std::cout << ">>>  T2: SC -> Testing the Constructor\n";
 		std::cout << "==========:==========:==========:==========:==========:"
 		             "==========:==========:==========:==========:==========\n";
-		seneca::ShoppingCart child1("Kyle Patel", 8, ppToys, count);
+		ShoppingCart child1("Kyle Patel", 8, ppToys, count);
 		std::cout << child1;  // 1
 		std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 		             "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n";
@@ -114,7 +114,7 @@ int main(int argc, char** argv)
 		std::cout << ">>>  T3: SC -> Testing the Copy Constructor\n";
 		std::cout << "==========:==========:==========:==========:==========:"
 		             "==========:==========:==========:==========:==========\n";
-		seneca::ShoppingCart child2(child1);
+		ShoppingCart child2(child1);
 		std::cout << child1;  // 2
 		std::cout << child2;  // 3
 		std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
@@ -127,7 +127,7 @@ int main(int argc, char** argv)
 			auto& refToChild = child2;
 			refToChild = child2;  // this will check for self assignment
 			std::cout << child2;  // 4
-			seneca::ShoppingCart child3("Paul Sakuraba", 11, ppToys + 3, 4);
+			ShoppingCart child3("Paul Sakuraba", 11, ppToys + 3, 4);
 			child2 = child3;
 			std::cout << child2;  // 5
 			std::cout << child3;  // 6
@@ -139,7 +139,7 @@ int main(int argc, char** argv)
 		std::cout << "==========:==========:==========:==========:==========:"
 		             "==========:==========:==========:==========:==========\n";
 		auto& refToChild = child2;
-		seneca::ShoppingCart child3(std::move(refToChild));
+		ShoppingCart child3(std::move(refToChild));
 		std::cout << child2;  // 7
 		std::cout << child3;  // 8
 		std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
@@ -167,7 +167,7 @@ int main(int argc, char** argv)
 		std::cout << ">>>  T7: CO -> Testing the Constructor\n";
 		std::cout << "==========:==========:==========:==========:==========:"
 		             "==========:==========:==========:==========:==========\n";
-		seneca::ConfirmationOrder order1;
+		ConfirmationOrder order1;
 		std::cout << order1;
 		std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 		             "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n";
@@ -188,7 +188,7 @@ int main(int argc, char** argv)
 		std::cout << ">>>  T9: CO -> Testing the Copy Constructor\n";
 		std::cout << "==========:==========:==========:==========:==========:"
 		             "==========:==========:==========:==========:==========\n";
-		seneca::ConfirmationOrder order2(order1);
+		ConfirmationOrder order2(order1);
 		std::cout << order1;
 		std::cout << order2;
 		std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
@@ -200,13 +200,13 @@ int main(int argc, char** argv)
 		std::cout << ">>>  T10: CO -> Testing the Move Constructor\n";
 		std::cout << "==========:==========:==========:==========:==========:"
 		             "==========:==========:==========:==========:==========\n";
-		seneca::ConfirmationOrder order3(std::move(order1));
+		ConfirmationOrder order3(std::move(order1));
 		std::cout << order1;
 		std::cout << order3;
 		std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 		             "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n";
 
-		seneca::ConfirmationOrder& refOrder3 = order3;
+		ConfirmationOrder& refOrder3 = order3;
 		refOrder3 = std::move(order3);
 	}
 
@@ -214,18 +214,18 @@ int main(int argc, char** argv)
 		// Making a new array of pointers to toy.
 		//   The toys in this array are not constant, so we must
 		//   create copies of the original toy (which are constant)
-		seneca::Toy* toys[]{
-								new seneca::Toy(*ppToys[3]),
-								new seneca::Toy(*ppToys[5]),
-								new seneca::Toy(*ppToys[7]),
-								new seneca::Toy(*ppToys[9])
+		Toy* toys[]{
+								new Toy(*ppToys[3]),
+								new Toy(*ppToys[5]),
+								new Toy(*ppToys[7]),
+								new Toy(*ppToys[9])
 							};
 
 		std::cout << ">>>  T11: SC + CO -> Testing Relations\n";
 		std::cout << "==========:==========:==========:==========:==========:"
 		             "==========:==========:==========:==========:==========\n";
-		seneca::ShoppingCart child("Tom Chow", 7, const_cast<const seneca::Toy**>(toys), 4u);
-		seneca::ConfirmationOrder order;
+		ShoppingCart child("Tom Chow", 7, const_cast<const Toy**>(toys), 4u);
+		ConfirmationOrder order;
 		(order += *toys[0]) += *toys[1];
 		(order += *toys[2]) += *toys[3];
 		std::cout << child;
